@@ -35,11 +35,7 @@ public class DemoApplicationTests {
 		factWeather.setWeather("fadsf");
 		factWeather.setWindDirect("fa");
 		factWeather.setWindLevel("1~7");
-
-
-
 		//factWeatherService.save(factWeather);
-
 
 	}
 

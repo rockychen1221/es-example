@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.demo.controller;
 
 import com.example.demo.model.FactWeather;
 import com.example.demo.service.FactWeatherService;
@@ -7,14 +7,13 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Controller
+@RestController
 @RequestMapping("/factweather")
-@Api(value = "FactWeatherController",tags={"流程操作"})
+@Api(value = "FactWeatherController",tags={"ElasticSearch Demo API"})
 public class FactWeatherController {
     @Resource
     private FactWeatherService factWeatherService;
