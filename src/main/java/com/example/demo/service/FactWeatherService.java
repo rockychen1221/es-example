@@ -22,4 +22,6 @@ public interface FactWeatherService {
 
     Page<FactWeather> pageQuery(Integer pageNo, Integer pageSize, String kw);
 
+    Page<FactWeather> pageQueryAll(Integer pageNo, Integer pageSize, String kw);
+
 }

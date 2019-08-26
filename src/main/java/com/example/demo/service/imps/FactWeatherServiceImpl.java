@@ -7,14 +7,11 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +55,19 @@ public class FactWeatherServiceImpl implements FactWeatherService {
     @Override
     public Page<FactWeather> pageQuery(Integer pageNo, Integer pageSize, String kw) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.matchPhraseQuery("name", kw))
+                .withQuery(QueryBuilders.matchPhraseQuery("area", kw))
+                .withPageable(PageRequest.of(pageNo, pageSize))
+                .build();
+        return factWeatherRepository.search(searchQuery);
+    }
+
+    @Override
+    public Page<FactWeather> pageQueryAll(Integer pageNo, Integer pageSize, String kw) {
+
+
+
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchPhraseQuery("area", kw))
                 .withPageable(PageRequest.of(pageNo, pageSize))
                 .build();
         return factWeatherRepository.search(searchQuery);

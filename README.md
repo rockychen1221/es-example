@@ -9,7 +9,7 @@
 ## 如何使用？
 1. 请先确保你有可用的ElasticSearch服务，如没有，请前往[elastic](https://www.elastic.co/cn/downloads/elasticsearch)下载对应版本安装
 2. 使用`mvn spring-boot : run`
-3. 浏览器输入localhost:8080/demo/doc.html
+3. 浏览器输入 `localhost:8080/demo/doc.html`
 
 ## Next
 1. 集成`logstash` 实现MySQL整表数据推送

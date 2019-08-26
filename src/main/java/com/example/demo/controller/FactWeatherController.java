@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -81,14 +82,15 @@ public class FactWeatherController {
      * @param area
      * @return
      */
-    @ApiOperation(value="根据地域查询", notes="根据地域查询详细信息")
-    @ApiImplicitParam(name = "area", value = "地域", required = true, dataType = "String", paramType = "path",defaultValue = "北京")
-    @RequestMapping(value = "getByArea/{area}", method = RequestMethod.GET)
-    public ResponseEntity getByArea (@PathVariable(value = "area") String area){
+    @ApiOperation(value="根据地域查询前十条", notes="根据地域查询前十条详细信息")
+    @ApiImplicitParam(name = "area", value = "地域", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "findByArea/{area}", method = RequestMethod.GET)
+    public ResponseEntity findByArea (@PathVariable(value = "area") String area){
         if (area.isEmpty()){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(factWeatherService.getByArea(area), HttpStatus.OK);
+        Page<FactWeather> page = factWeatherService.pageQuery(0, 10, area);
+        return new ResponseEntity(page , HttpStatus.OK);
     }
 
     /**
@@ -99,7 +101,7 @@ public class FactWeatherController {
     @ApiOperation(value="根据地域和天气查询", notes="根据地域和天气查询详细信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "area", value = "地域", required = true),
-            @ApiImplicitParam(name = "weather", value = "天气", required = true),
+            @ApiImplicitParam(name = "weather", value = "天气", required = true)
     })
     @RequestMapping(value = "findByAreaAndWeather", method = RequestMethod.GET)
     public ResponseEntity findByAreaAndWeather (@RequestParam(value = "area") String area,@RequestParam(value = "weather") String weather){
@@ -114,10 +116,25 @@ public class FactWeatherController {
      * @return
      */
     @ApiOperation(value = "获取天气总数量", notes = "获取所有天气总数")
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public ResponseEntity getAll() {
-        //List list= (List) factWeatherService.getAll();
-        return new ResponseEntity(factWeatherService.getAll(), HttpStatus.OK);
+    @RequestMapping(value = "/getAllCount", method = RequestMethod.GET)
+    public ResponseEntity getAllCount() {
+        return new ResponseEntity(factWeatherService.count(), HttpStatus.OK);
+    }
+
+    /**
+     * 全字段查询前十条
+     * @param str
+     * @return
+     */
+    @ApiOperation(value="全字段查询前十条", notes="查询前十条详细信息")
+    @ApiImplicitParam(name = "str", value = "值", required = true, dataType = "String", paramType = "path")
+    @RequestMapping(value = "pageQueryAll/{str}", method = RequestMethod.GET)
+    public ResponseEntity pageQueryAll (@PathVariable(value = "str") String str){
+        if (str.isEmpty()){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        Page<FactWeather> page = factWeatherService.pageQuery(0, 10, str);
+        return new ResponseEntity(page , HttpStatus.OK);
     }
 
 }
