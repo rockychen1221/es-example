@@ -7,11 +7,14 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,9 @@ public class FactWeatherServiceImpl implements FactWeatherService {
     }
 
     @Override
-    public FactWeather save(FactWeather factWeather) {
-        return factWeatherRepository.save(factWeather);
+    public void saveAll(Iterable<FactWeather> factWeathers) {
+        factWeatherRepository.deleteAll();
+        factWeatherRepository.saveAll(factWeathers);
     }
 
     @Override
@@ -43,9 +47,9 @@ public class FactWeatherServiceImpl implements FactWeatherService {
     }
 
     @Override
-    public List<FactWeather> getByName(String name) {
+    public List<FactWeather> getByArea(String area) {
         List<FactWeather> list = new ArrayList<>();
-        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("name", name);
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("area", area);
         Iterable<FactWeather> iterable = factWeatherRepository.search(matchQueryBuilder);
         iterable.forEach(e->list.add(e));
         return list;
@@ -58,5 +62,11 @@ public class FactWeatherServiceImpl implements FactWeatherService {
                 .withPageable(PageRequest.of(pageNo, pageSize))
                 .build();
         return factWeatherRepository.search(searchQuery);
+    }
+
+
+    @Override
+    public List<FactWeather> findByAreaAndWeather(String area, String weather) {
+        return factWeatherRepository.findByAreaAndWeather(area,weather);
     }
 }

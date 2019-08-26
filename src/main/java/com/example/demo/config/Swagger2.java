@@ -7,6 +7,7 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -32,7 +33,8 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("ES Example 接口")
-                .version("1.0.0.")
+                .version("1.0.0")
+                .contact(new Contact("rockychen","https://rockychen1221.github.io","rockychen1221@163.com"))
                 .build();
     }
 

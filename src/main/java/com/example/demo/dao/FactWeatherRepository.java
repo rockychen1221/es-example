@@ -3,9 +3,10 @@ package com.example.demo.dao;
 import com.example.demo.model.FactWeather;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface FactWeatherRepository extends ElasticsearchRepository<FactWeather,String > {
+public interface FactWeatherRepository extends ElasticsearchRepository<FactWeather,Integer > {
+
+    List<FactWeather> findByAreaAndWeather(String area,String weather);
 
 }

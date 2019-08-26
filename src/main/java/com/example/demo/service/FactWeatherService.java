@@ -9,13 +9,16 @@ public interface FactWeatherService {
 
     long count();
 
-    FactWeather save(FactWeather factWeather);
+    void saveAll(Iterable<FactWeather> factWeathers);
 
     void delete(FactWeather factWeather);
 
     Iterable<FactWeather> getAll();
 
-    List<FactWeather> getByName(String name);
+    List<FactWeather> getByArea(String area);
+
+
+    List<FactWeather> findByAreaAndWeather(String area,String weather);
 
     Page<FactWeather> pageQuery(Integer pageNo, Integer pageSize, String kw);
 

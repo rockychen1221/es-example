@@ -26,24 +26,6 @@ public class DemoApplicationTests {
 	@Test
 	public void testInsert() {
 
-		FactWeather factWeather = new FactWeather();
-		factWeather.setArea("北京");
-		factWeather.setDt("2018-01-20");
-		factWeather.setId("1");
-		factWeather.setMinTemp("1");
-		factWeather.setMaxTemp("7");
-		factWeather.setWeather("fadsf");
-		factWeather.setWindDirect("fa");
-		factWeather.setWindLevel("1~7");
-		//factWeatherService.save(factWeather);
-
-	}
-
-	@Test
-	public void testDelete() {
-		FactWeather factWeather = new FactWeather();
-		factWeather.setId("1");
-		factWeatherService.delete(factWeather);
 	}
 
 	@Test
@@ -54,7 +36,7 @@ public class DemoApplicationTests {
 
 	@Test
 	public void testGetByName() {
-		List<FactWeather> list = factWeatherService.getByName("北京");
+		List<FactWeather> list = factWeatherService.getByArea("北京");
 		System.out.println(list);
 	}
 
