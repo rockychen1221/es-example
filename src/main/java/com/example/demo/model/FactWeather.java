@@ -1,7 +1,8 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -11,7 +12,8 @@ import java.io.Serializable;
  * 天气数据
  */
 @Data
-@Accessors(chain = true)
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Document(indexName = "weather")
 public class FactWeather  implements Serializable {
 

@@ -133,7 +133,7 @@ public class FactWeatherController {
         if (str.isEmpty()){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-        Page<FactWeather> page = factWeatherService.pageQuery(0, 10, str);
+        Page<FactWeather> page = factWeatherService.pageQueryAll(0, 10, str);
         return new ResponseEntity(page , HttpStatus.OK);
     }
 

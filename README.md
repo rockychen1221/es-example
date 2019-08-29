@@ -12,5 +12,6 @@
 3. 浏览器输入 `localhost:8080/demo/doc.html`
 
 ## Next
-1. 集成`logstash` 实现MySQL整表数据推送
-2. 加入`kibana` 实现数据分析展示
+1. 加入中文和拼音分词
+2. 集成`logstash` 实现MySQL整表数据推送
+3. 加入`kibana` 实现数据分析展示
